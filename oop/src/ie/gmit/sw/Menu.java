@@ -2,8 +2,18 @@ package ie.gmit.sw;
 
 import java.util.Scanner;
 
+/**
+ * 
+ * @author shanedaniels
+ *
+ */
+
 public class Menu {
 
+	/**
+	 * 
+	 * @throws InterruptedException
+	 */
 	public Menu() throws InterruptedException {
 
 		Scanner scanner = new Scanner(System.in);

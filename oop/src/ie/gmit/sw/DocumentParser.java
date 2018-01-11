@@ -9,6 +9,12 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * 
+ * @author shanedaniels
+ *
+ */
+
 public class DocumentParser implements Runnable{
 
 	private BlockingQueue<Shingle>queue;
@@ -17,6 +23,13 @@ public class DocumentParser implements Runnable{
 	private Deque<String> buffer = new LinkedList<>();
 	private int docId;
 
+	/**
+	 * 
+	 * @param file
+	 * @param q
+	 * @param shingleSize
+	 * @param docId
+	 */
 	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int docId) {
 		this.queue = q;
 		this.file = file;
@@ -24,6 +37,9 @@ public class DocumentParser implements Runnable{
 		this.docId = docId;
 	}
 	
+	/**
+	 * 
+	 */
 	public void run() {
 		try {
 
@@ -51,6 +67,9 @@ public class DocumentParser implements Runnable{
 	}// Run
 
 
+	/**
+	 * 
+	 */
 	private void addWordsToBuffer(String [] words) {
 		for(String s : words) {
 			buffer.add(s);
@@ -58,6 +77,10 @@ public class DocumentParser implements Runnable{
   
     }
 
+	/**
+	 * 
+	 * @return
+	 */
 	private Shingle getNextShingle() {
 		StringBuilder sb = new StringBuilder();
 		int counter = 0;
@@ -80,6 +103,10 @@ public class DocumentParser implements Runnable{
 		
 	}
 	
+	/**
+	 * 
+	 * @throws InterruptedException
+	 */
 	private void flushBuffer() throws InterruptedException{
 
 		while(buffer.size() > 0) {

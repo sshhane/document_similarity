@@ -3,8 +3,20 @@ package ie.gmit.sw;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * 
+ * @author shanedaniels
+ *
+ */
+
 public class Launcher {
 
+	/**
+	 * 
+	 * @param f1
+	 * @param f2
+	 * @throws InterruptedException
+	 */
 	public void Launch(String f1, String f2) throws InterruptedException {
 
 		int shingleSize = 5;

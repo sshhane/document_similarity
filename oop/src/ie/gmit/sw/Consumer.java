@@ -33,6 +33,7 @@ public class Consumer implements Runnable {
 	
 	/**
 	 * 
+	 * 
 	 * @param q			a LinkedBlockingQueue of type Shingle
 	 * @param k			int number of minhashes
 	 * @param poolSize	int size of thread pool
@@ -44,6 +45,9 @@ public class Consumer implements Runnable {
 		init();
 	}
 	
+	/**
+	 * generates a random int and populates minhashes array
+	 */
 	public void init() {
 		Random random = new Random();
 		minhashes = new int[k];
@@ -52,6 +56,17 @@ public class Consumer implements Runnable {
 		}
 	}
 	
+	/**
+	 * if file has reached its end (calls poison), decrements counter
+	 * runs for each text document (2x)
+	 * Overrides run
+	 * maps files doc ID
+	 * if this list is null 
+	 * 
+	 * 
+	 * shuts down the thread pool
+	 * compares the jaccard index of each file
+	 */
 	public void run() {
 		int docCount = 2;
 		while(docCount > 0) {
@@ -98,9 +113,9 @@ public class Consumer implements Runnable {
 		System.out.println("Size of lists: " + map.get(1).size() + ", " + map.get(2).size());
 		List<Integer> intersection = map.get(1);
 		intersection.retainAll(map.get(2));
-		float jacquared = (float)intersection.size()/(k*2-(float)intersection.size());
+		float jaccard = (float)intersection.size()/(k*2-(float)intersection.size());
 		
-		System.out.println("J: " + (jacquared) * 100);
+		System.out.println("Jaccard: " + (jaccard) * 100);
 	}
 }
 
