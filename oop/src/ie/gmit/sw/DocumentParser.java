@@ -17,14 +17,17 @@ public class DocumentParser implements Runnable{
 	private Deque<String> buffer = new LinkedList<>();
 	private int docId;
 
-	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize) {
+	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int docId) {
 		this.queue = q;
+		this.file = file;
+		this.shingleSize = shingleSize;
+		this.docId = docId;
 	}
 	
 	public void run() {
 		try {
+
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			
 			String line;
 			while((line = br.readLine()) != null) {
 				if(line.length()>0) {
@@ -37,7 +40,6 @@ public class DocumentParser implements Runnable{
 			}
 			
 			flushBuffer();
-			br.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -9,13 +9,13 @@ public class Launcher {
 
 		int shingleSize = 5;
 		int pool = 200;
-		int k = 500;
+		int k = 200;
 
 		BlockingQueue<Shingle> q = new LinkedBlockingQueue<Shingle>(100);	
 		// threadPoolSize	
 
-		Thread t1 = new Thread(new DocumentParser(f1, q, shingleSize), "T1");
-		Thread t2 = new Thread(new DocumentParser(f2, q, shingleSize), "T2");
+		Thread t1 = new Thread(new DocumentParser(f1, q, shingleSize, 1), "T1");
+		Thread t2 = new Thread(new DocumentParser(f2, q, shingleSize, 2), "T2");
 		Thread t3 = new Thread(new Consumer(q, k, pool), "T3");
 		
 		t1.start();
