@@ -4,6 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Launcher {
+
 	public void Launch(String f1, String f2) {
 		int blockingQueueSize = 5;
 		int shingleSize = 5;

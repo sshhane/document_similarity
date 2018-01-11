@@ -47,57 +47,57 @@ public class Consumer implements Runnable {
 			
 			////
 			
-			if(s.getHashcode() != 48) {
-				pool.execute(new Runnable() {
-
-					@Override
-					public void run() {
-						List<Integer>list = map.get(s.getDocId());
-						
-						for (int i = 0; i < minhashes.length; i++) {
-							int value = s.getHashcode() ^ minhashes[i];
-							if(list == null) {
-								list = new ArrayList<Integer>(Collections.nCopies(k, Integer.MAX_VALUE));
-								map.put(s.getDocId(), list);
-							}
-							else {
-								if(list.get(i) > value) {
-									list.set(i, value);
-								}
-							}
-						}
-						map.put(s.getDocId(), list);
-					}
-				});
-			}
-			else {
-				docCount--;
-			}
+//			if(s.getHashcode() != 48) {
+//				pool.execute(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						List<Integer>list = map.get(s.getDocId());
+//						
+//						for (int i = 0; i < minhashes.length; i++) {
+//							int value = s.getHashcode() ^ minhashes[i];
+//							if(list == null) {
+//								list = new ArrayList<Integer>(Collections.nCopies(k, Integer.MAX_VALUE));
+//								map.put(s.getDocId(), list);
+//							}
+//							else {
+//								if(list.get(i) > value) {
+//									list.set(i, value);
+//								}
+//							}
+//						}
+//						map.put(s.getDocId(), list);
+//					}
+//				});
+//			}
+//			else {
+//				docCount--;
+//			}
 			
 			////
 			
-//			if(s instanceof Poison) {
-//				docCount--;
-//			}
-//			else {
-//				pool.execute(new Runnable() {
-//					for(int i = 0; i < minhashes.length; i++) {
-//						int value = s.getHashCode()^minhashes[i]; // ^ - xor(Random generated key)
-//						List<Integer> list = map.get(s.getDocId());
-//						if(list == null) {					// Happens once for each document
-//							list = new ArrayList<Integer>(k); // k - size   //
-//							for (int j =0; j < list.length; j++) {		//
-//								list.set(j > Integer.MAX_VALUE);	//
-//							}						//
-//							map.pool(s.getDocId(), list0);			//
-//						}
-//						else {
-//							if(list.get(i) > value)
-//								list.set(i, value);
-//						}
-//					}// For
-//				}// Execute
-//			}// Else
+			if(s instanceof Poison) {
+				docCount--;
+			}
+			else {
+				pool.execute(new Runnable() {
+					for(int i = 0; i < minhashes.length; i++) {
+						int value = s.getHashCode()^minhashes[i]; // ^ - xor(Random generated key)
+						List<Integer> list = map.get(s.getDocId());
+						if(list == null) {					// Happens once for each document
+							list = new ArrayList<Integer>(k); // k - size   //
+							for (int j =0; j < list.length; j++) {		//
+								list.set(j > Integer.MAX_VALUE);	//
+							}						//
+							map.pool(s.getDocId(), list0);			//
+						}
+						else {
+							if(list.get(i) > value)
+								list.set(i, value);
+						}
+					}// For
+				}// Execute
+			}// Else
 			
 			
 		}// While

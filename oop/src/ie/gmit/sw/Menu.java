@@ -16,16 +16,20 @@ public class Menu {
 		        case 1:
 		            // Enter files
 		        		System.out.println("Enter file 1:");
-		        		String file1 = scanner.nextLine();
+		        		String file1 = scanner.next();
 		        		System.out.println("Enter file 1:");
-		        		String file2 = scanner.nextLine();
+		        		String file2 = scanner.next();
+		        		
+		        		new Launcher().Launch(file1, file2);
 
 		            break;
 		        case 2:
 		            // quit
+		        		System.out.println("Quit");
 		            break;
 		        default:
 		            // Wrong
+		        		System.out.println("Invalid input");
 		    }
 	    }
 	}
