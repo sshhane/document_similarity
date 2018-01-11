@@ -11,7 +11,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import ie.gmit.sw.Poison;
+/**
+ * 
+ * @author shanedaniels
+ *
+ */
+
 
 public class Consumer implements Runnable {
 
@@ -25,6 +30,13 @@ public class Consumer implements Runnable {
 		return map;
 	}
 
+	
+	/**
+	 * 
+	 * @param q			a LinkedBlockingQueue of type Shingle
+	 * @param k			int number of minhashes
+	 * @param poolSize	int size of thread pool
+	 */
 	public Consumer(BlockingQueue<Shingle> q, int k, int poolSize) {
 		this.q = q;
 		this.k = k;
@@ -83,8 +95,7 @@ public class Consumer implements Runnable {
 		catch (InterruptedException e) {
 			// TODO: handle exception
 		}
-//		System.out.println("Size of list 1: " + map.get(1).size());
-//		System.out.println("Size of list 2: " + map.get(2).size());
+		System.out.println("Size of lists: " + map.get(1).size() + ", " + map.get(2).size());
 		List<Integer> intersection = map.get(1);
 		intersection.retainAll(map.get(2));
 		float jacquared = (float)intersection.size()/(k*2-(float)intersection.size());
