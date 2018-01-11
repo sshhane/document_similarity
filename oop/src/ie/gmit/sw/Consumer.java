@@ -39,38 +39,38 @@ public class Consumer implements Runnable {
 		int docCount = 2;
 		while (docCount > 0) {
 
-			Shingle s = null;
 				try {
+					Shingle s;
 					s = q.take();
+					if (s instanceof Poison) {
+						docCount--;
+					} else {
+						pool.execute(new Runnable() {
+							@Override
+							public void run() {
+								runCnt++;
+								List<Integer> list = map.get(s.getDocId());
+								for (int i = 0; i < minhashes.length; i++) {
+									int value = s.getHashcode() ^ minhashes[i];
+									list = map.get(s.getDocId());
+									if (list == null) {
+										list = new ArrayList<Integer>(Collections.nCopies(k, Integer.MAX_VALUE));
+										map.put(s.getDocId(), list);
+										nullCnt++;
+									} else {
+										if (list.get(i) > value) {
+											list.set(i, value);
+										}
+									}
+								}
+								map.put(s.getDocId(), list);
+							}
+						});
+					}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			if (s instanceof Poison) {
-				docCount--;
-			} else {
-				pool.execute(new Runnable() {
-					@Override
-					public void run() {
-						runCnt++;
-						List<Integer> list = map.get(s.getDocId());
-						for (int i = 0; i < minhashes.length; i++) {
-							int value = s.getHashcode() ^ minhashes[i];
-							list = map.get(s.getDocId());
-							if (list == null) {
-								list = new ArrayList<Integer>(Collections.nCopies(k, Integer.MAX_VALUE));
-								map.put(s.getDocId(), list);
-								nullCnt++;
-							} else {
-								if (list.get(i) > value) {
-									list.set(i, value);
-								}
-							}
-						}
-						map.put(s.getDocId(), list);
-					}
-				});
-			}
 		}
 	}
 }
