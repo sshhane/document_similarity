@@ -2,12 +2,16 @@ package ie.gmit.sw;
 
 public class Shingle {
 	private int docId;
-	private int hashcode;
+	private int hashCode;
 	
-	public Shingle(int docId, int hashcode) {
+	public Shingle() {
+		super();
+	}
+
+	public Shingle(int docId, int hashCode) {
 		super();
 		this.docId = docId;
-		this.hashcode = hashcode;
+		this.hashCode = hashCode;
 	}
 
 	public int getDocId() {
@@ -18,13 +22,13 @@ public class Shingle {
 		this.docId = docId;
 	}
 
-	public int getHashcode() {
-		return hashcode;
+	public int getHashCode() {
+		return hashCode;
 	}
 
-	public void setHashcode(int hashcode) {
-		this.hashcode = hashcode;
+	public void setHashCode(int hashCode) {
+		this.hashCode = hashCode;
 	}
 	
-	
 }
+

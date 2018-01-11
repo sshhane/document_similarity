@@ -2,6 +2,8 @@ package ie.gmit.sw;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -11,11 +13,11 @@ public class DocumentParser implements Runnable{
 
 	private BlockingQueue<Shingle>queue;
 	private String file;
-	private int shingleSize, k;
+	private int shingleSize;
 	private Deque<String> buffer = new LinkedList<>();
 	private int docId;
 
-	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int k) {
+	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize) {
 		this.queue = q;
 	}
 	
@@ -23,19 +25,26 @@ public class DocumentParser implements Runnable{
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			
-			String line = null;
+			String line;
 			while((line = br.readLine()) != null) {
-				String uLine = line.toUpperCase();
-				String[] words = uLine.split(" "); // Can also take a regexpression
-				addWordsToBuffer(words);
-				Shingle s = getNextShingle();
-				queue.put(s); // Blocking method. Add is not a blocking method
+				if(line.length()>0) {
+					String uLine = line.toUpperCase();
+					String [] words = uLine.split("\\s+");
+					addWordsToBuffer(words);
+					Shingle s = getNextShingle();
+					queue.put(s);
+				}
 			}
+			
 			flushBuffer();
 			br.close();
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}// Run
 
