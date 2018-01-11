@@ -25,10 +25,10 @@ public class DocumentParser implements Runnable{
 
 	/**
 	 * 
-	 * @param file
-	 * @param q
-	 * @param shingleSize
-	 * @param docId
+	 * @param file			String of file name, e.g. war-and-peace.txt
+	 * @param q				Shingle LinkedBlockingQueue
+	 * @param shingleSize	int number of words in shingle
+	 * @param docId			file ID
 	 */
 	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int docId) {
 		this.queue = q;
