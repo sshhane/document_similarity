@@ -9,7 +9,7 @@ package ie.gmit.sw;
 public class Poison extends Shingle{
 
 	/**
-	 * 
+	 * interrupt consumer and close BlockingQueue
 	 * @param docId
 	 * @param hashCode
 	 */

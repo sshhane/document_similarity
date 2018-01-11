@@ -38,7 +38,10 @@ public class DocumentParser implements Runnable{
 	}
 	
 	/**
-	 * 
+	 * take file contents in BufferedReader
+	 * loop over file until end
+	 * split on whitespace 
+	 * add each shingle to queue
 	 */
 	public void run() {
 		try {
@@ -68,7 +71,7 @@ public class DocumentParser implements Runnable{
 
 
 	/**
-	 * 
+	 * adds each word separated by space to the buffer
 	 */
 	private void addWordsToBuffer(String [] words) {
 		for(String s : words) {
@@ -78,8 +81,9 @@ public class DocumentParser implements Runnable{
     }
 
 	/**
-	 * 
-	 * @return
+	 * loops for size of shingle
+	 * if there is another value, append
+	 * @return	the next shingle String or null
 	 */
 	private Shingle getNextShingle() {
 		StringBuilder sb = new StringBuilder();
@@ -104,7 +108,8 @@ public class DocumentParser implements Runnable{
 	}
 	
 	/**
-	 * 
+	 * if next shingle is null put on queue
+	 * adds Poison to queue
 	 * @throws InterruptedException
 	 */
 	private void flushBuffer() throws InterruptedException{

@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class Menu {
 
 	/**
-	 * 
+	 * Prompts user for files
+	 * creates new Launcher with selected files
 	 * @throws InterruptedException
 	 */
 	public Menu() throws InterruptedException {

@@ -10,9 +10,7 @@ public class Shingle {
 	private int docId;
 	private int hashCode;
 	
-	/**
-	 * 
-	 */
+
 	public Shingle() {
 		super();
 	}

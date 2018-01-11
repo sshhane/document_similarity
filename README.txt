@@ -1,11 +1,14 @@
-# document_similarity
-A Java API for  Measuring Document Similarity
+Shane Daniels
+G00332592
 
-## Description
-Compare the similarity of two text files using their Jaccard Indices
+Description
+-----------
+A Java API for  Measuring Document Similarity.
+Compare the similarity of two text files using their Jaccard Indices.
 
 
-## Example Output
+Example Output
+--------------
 
 Press 1 to enter Files
 Press 2 to quit
@@ -16,6 +19,8 @@ db.txt
 Enter file 2:
 war-and-peace.txt
 Jaccard: 0.0
+
+------------
 
 
   _
